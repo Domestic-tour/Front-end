@@ -409,3 +409,27 @@ tr {
 .row-nhanvien.active{
     background-color: rgb(241, 241, 241);
 }
+/* overlay account */
+.header__maneger:hover #overlay-account{
+    display: block;
+}
+#overlay-account{
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    cursor: pointer;
+    display: none;
+}
+#overlay-account li{
+    padding: 8px;
+}
+#overlay-account li:hover{
+    background-color: rgb(241, 241, 241);
+}

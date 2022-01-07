@@ -1,29 +1,37 @@
 <link rel="stylesheet" href="/css/Customers.css">
 <form hidden id="form-change-NgayKhoiHanh">
-    <input  type="text" name="MaDoan" id="input-form-change-NgayKhoiHanh-MaDoan" value="">
-    <input  type="text" name="NgayKhoiHanh" id="input-form-change-NgayKhoiHanh-NgayKhoiHanh" value="">
+    <input type="text" name="MaDoan" id="input-form-change-NgayKhoiHanh-MaDoan" value="">
+    <input type="text" name="NgayKhoiHanh" id="input-form-change-NgayKhoiHanh-NgayKhoiHanh" value="">
 </form>
 <form hidden action="/handle/finishDoanDuLich" method="POST" id="form-finish-doandulich">
-    <input  type="text" name="MaDoan" id="input-form-finishDoanDuLich-MaDoan">
+    <input type="text" name="MaDoan" id="input-form-finishDoanDuLich-MaDoan">
 </form>
-<form hidden action="/handle/increateSoThuTuDiaDiemOfDoanDuLich" method="POST" id="form-increateSoThuTuDiaDiem-doandulich">
-    <input  type="text" name="SoThuTuDiaDiem" id="input-form-increateSoThuTuDiaDiemOfDoanDuLich-SoThuTuDiaDiem">
-    <input  type="text" name="MaDoan" id="input-form-increateSoThuTuDiaDiemOfDoanDuLich-MaDoan">
+<form hidden action="/handle/increateSoThuTuDiaDiemOfDoanDuLich" method="POST"
+    id="form-increateSoThuTuDiaDiem-doandulich">
+    <input type="text" name="SoThuTuDiaDiem" id="input-form-increateSoThuTuDiaDiemOfDoanDuLich-SoThuTuDiaDiem">
+    <input type="text" name="MaDoan" id="input-form-increateSoThuTuDiaDiemOfDoanDuLich-MaDoan">
 </form>
-<div class="customer__header">
-    <div class="customer__search">
-        <div class="customer__search-icon">
-            <i class="fas fa-search"></i>
-        </div>
-        <input type="text" class="customer__search-input" placeholder="Search...">
-    </div>
-    <div class="customer__add">
-        <a href="" id="button-add-new-doandulich">
-            <div class="customer__add-btn">
-                <i class="customer__add-icon fas fa-plus"></i>
+<div style="position: relative;">
+    <div class="customer__header">
+        <div class="customer__search">
+            <div class="customer__search-icon">
+                <i class="fas fa-search"></i>
             </div>
-        </a>
+            <input type="text" class="customer__search-input" placeholder="Search...">
+        </div>
+        <div class="customer__add">
+            <a href="" id="button-add-new-doandulich">
+                <div class="customer__add-btn">
+                    <i class="customer__add-icon fas fa-plus"></i>
+                </div>
+            </a>
+        </div>
     </div>
+    <ul id="overlay-tour-group">
+        {{#each doandulichs}}
+        <li data-madoan="{{this.MaDoan}}">{{this.TenDoan}}</li>
+        {{/each}}
+    </ul>
 </div>
 <div class="customer__container">
     <div>
@@ -53,7 +61,7 @@
                 <tr class="row-doandulich">
                     <td hidden class="row-check-finish-doandulich">{{this.CheckFinish}}</td>
                     <td>{{this.MaTour}}</td>
-                    <td>{{this.MaDoan}}</td>
+                    <td class="MaDoan-doandulich">{{this.MaDoan}}</td>
                     <td>{{this.TenDoan}}</td>
                     <td>{{this.NgayKhoiHanh}}</td>
                     <td>{{this.SoLuongThanhVien}}</td>
@@ -177,7 +185,7 @@
                     <td>{{this.CMND}}</td>
                     <td>{{this.GioiTinh}}</td>
                     <td>{{this.SDT}}</td>
-                    <td>{{this.MaDoan}}</td>
+                    <td class="MaDoan-khachhang">{{this.MaDoan}}</td>
                     <td>
                         <div class="container-icon-extend-option">
                             <div class="icon-extend-option">
@@ -207,8 +215,8 @@
                     <th></th>
                 </tr>
                 {{#each listPhuongTien}}
-                <tr class="row-khachhang">
-                    <td>{{this.MaDoan}}</td>
+                <tr class="row-phuongtien">
+                    <td class="MaDoan-phuongtien">{{this.MaDoan}}</td>
                     <td>{{this.TenDoan}}</td>
                     <td>{{this.PhuongTien}}</td>
                     <td>

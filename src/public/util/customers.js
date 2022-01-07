@@ -34,7 +34,7 @@ $('.btn-edit-doandulich.tourist-groups').on('click', function () {
     let jsDateNgayKhoiHanh = new Date(ngaykhoihanh)
     // chưa khởi hành  thì có thể sửa ngày khởi hành
     if (jsDateNgayKhoiHanh < jsDateCurrentDay) {
-        let newNgayKhoihanh = prompt(`Nhập ngày khởi hành mới cho: ${TenDoan}\nĐịnh dạng : mm/dd/yyyy\nChúc bạn có một chuyến đi zui ze :)))`)
+        let newNgayKhoihanh = prompt(`Nhập ngày khởi hành mới cho: ${TenDoan}\nĐịnh dạng : mm/dd/yyyy`)
         console.log(newNgayKhoihanh)
         //submit form change NgayKhoiHanh
         if (newNgayKhoihanh == '' || newNgayKhoihanh === null)
@@ -52,8 +52,11 @@ $('.btn-edit-doandulich.tourist-groups').on('click', function () {
 $('.btn-finish-doandulich.tourist-groups').on('click', function () {
     let index = $('.btn-finish-doandulich').index(this)
     let MaDoan = $('.row-doandulich td:nth-child(3)').eq(index).html()
-    $('#input-form-finishDoanDuLich-MaDoan').attr('value', MaDoan)
-    $('#form-finish-doandulich').submit()
+
+    if (confirm(`Bạn có chắc chắn muốn hoàn thành đoàn du lịch ${MaDoan} ?`)) {
+        $('#input-form-finishDoanDuLich-MaDoan').attr('value', MaDoan)
+        $('#form-finish-doandulich').submit()
+    }
 })
 
 
@@ -74,17 +77,17 @@ $('.btn-edit-destination').on('click', function () {
     let present = $('.DiaDiem-totalDiaDiem').eq(index).html().split('/')[0]
     let totalPresent = $('.DiaDiem-totalDiaDiem').eq(index).html().split('/')[1]
     let MaDoan = $('.MaDoan-destination').eq(index).html()
-    if(present < totalPresent-1){
+    if (present < totalPresent - 1) {
         let checked = confirm('Bạn muốn đến địa điểm du lịch tiếp theo.')
-        if(checked){
-            $('#input-form-increateSoThuTuDiaDiemOfDoanDuLich-SoThuTuDiaDiem').attr('value', parseInt(present)+1)
-            $('#input-form-increateSoThuTuDiaDiemOfDoanDuLich-MaDoan').attr('value',MaDoan)
+        if (checked) {
+            $('#input-form-increateSoThuTuDiaDiemOfDoanDuLich-SoThuTuDiaDiem').attr('value', parseInt(present) + 1)
+            $('#input-form-increateSoThuTuDiaDiemOfDoanDuLich-MaDoan').attr('value', MaDoan)
             $('#form-increateSoThuTuDiaDiem-doandulich').submit()
         }
     }
-    else{
+    else {
         let checked = confirm('Địa điểm cuối rồi, bạn có muốn hoàn thành chuyến đi không.')
-        if(checked){
+        if (checked) {
             console.log(MaDoan)
             $('#input-form-finishDoanDuLich-MaDoan').attr('value', MaDoan)
             $('#form-finish-doandulich').submit()
@@ -194,4 +197,69 @@ function setColorAndValForCheckFinished() {
             $('.span-checkfinish-doandulich').eq(i).addClass('active')
         }
     }
+}
+
+// handle search
+$('.customer__search-input').on('keyup', function () {
+    let value = $(this).val()
+    console.log(value)
+    if (value.length > 0) {
+        $('#overlay-tour-group').css('display', 'block')
+    } else {
+        $('#overlay-tour-group').css('display', 'none')
+    }
+    $('#overlay-tour-group li').each(function () {
+        let text = $(this).text()
+        if (text.toLowerCase().indexOf(value.toLowerCase()) == -1) {
+            $(this).css('display', 'none')
+        } else {
+            $(this).css('display', 'block')
+        }
+    })
+})
+// handle click item search
+$('#overlay-tour-group li').on('click', function () {
+    $('.customer__search-input').val('')
+    $('#overlay-tour-group').css('display', 'none')
+    let MaDoan = $(this).data('madoan')
+    console.log({ MaDoan })
+    $('.ten-nhan-vien').each(function () {
+        let text = $(this).text()
+        let index = $('.ten-nhan-vien').index(this)
+        if (text.indexOf(MaDoan) != -1) {
+            $('.row-nhanvien').eq(index).addClass('active')
+            console.log({ text })
+        }
+    })
+    $('.row-doandulich').removeClass('active')
+    $('.row-destination').removeClass('active')
+    $('.row-khachhang').removeClass('active')
+    $('.row-phuongtien').removeClass('active')
+
+    activeItemSearch('.MaDoan-doandulich', '.row-doandulich', MaDoan)
+    activeItemSearch('.MaDoan-destination', '.row-destination', MaDoan)
+    activeItemSearch('.MaDoan-khachhang', '.row-khachhang', MaDoan)
+    activeItemSearch('.MaDoan-phuongtien', '.row-phuongtien', MaDoan)
+
+})
+function activeItemSearch(classItem, classRow, value) {
+    $(classItem).each(function () {
+        let text = $(this).text()
+        let index = $(classItem).index(this)
+        if (text.indexOf(value) != -1) {
+            $(classRow).eq(index).addClass('active')
+            console.log({ text })
+        }
+    })
+}
+uncheckedActive('.row-doandulich')
+uncheckedActive('.row-destination')
+uncheckedActive('.row-khachhang')
+uncheckedActive('.row-phuongtien')
+function uncheckedActive(classRow) {
+    $(classRow).on('click', function () {
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active')
+        }
+    })
 }

@@ -37,11 +37,11 @@ $('.button-add-new-khachhang').on('click', function (e) {
     <div>
         <div class="addtg__container-info">
             <label class="addtg__container-label" for="">Tên khách hàng:</label>
-            <input class="addtg__container-input" type="text" name="${numberNextKhachHang}-HoTen" id="">
+            <input class="addtg__container-input" type="text" name="${numberNextKhachHang}-HoTen" id="" required>
         </div>
         <div class="addtg__container-info">
             <label class="addtg__container-label" for="">CMND/CC:</label>
-            <input class="addtg__container-input" t type="text" name="${numberNextKhachHang}-CMND" id="">
+            <input class="addtg__container-input" t type="text" name="${numberNextKhachHang}-CMND" id="" required>
         </div>
         <div class="addtg__container-info">
             <label class="addtg__container-label" for="">Giới tính:</label>
@@ -52,7 +52,7 @@ $('.button-add-new-khachhang').on('click', function (e) {
         </div>
         <div class="addtg__container-info">
             <label class="addtg__container-label" for="">Số điện thoại:</label>
-            <input class="addtg__container-input" type="text" name="${numberNextKhachHang}-SDT" id="">
+            <input class="addtg__container-input" type="text" name="${numberNextKhachHang}-SDT" id="" required>
         </div>
     </div>
 </div>

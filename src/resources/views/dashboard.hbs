@@ -1,11 +1,18 @@
 <link rel="stylesheet" href="/css/dashboard.css">
 <div class="dashboad__header">
     <h3 class="dashboad__heading">Hi, Welcome back</h3>
-    <div class="dashboad__search">
-        <input type="text" class="dashboad__search-input" placeholder="Search...">
-        <div class="dashboad__search-icon">
-        <i class="fas fa-search"></i>
+    <div style="position: relative;">
+        <div class="dashboad__search">
+            <input type="text" class="dashboad__search-input" placeholder="Search...">
+            <div class="dashboad__search-icon">
+                <i class="fas fa-search"></i>
+            </div>
         </div>
+        <ul id="overlay-dashboard">
+            {{#each tour}}
+            <li><a href="/tours/{{this.MaTour}}">{{this.TenTour}}</a></li>
+            {{/each}}
+        </ul>
     </div>
 </div>
 <div class="dashboard-container">
@@ -31,8 +38,26 @@
 </div>
 
 <script>
-    
+
     $('.container-item-tag').removeClass('active')
     $('.container-item-tag').eq(0).addClass('active')
-   
+
+    //handle search
+    $('.dashboad__search-input').on('keyup', function () {
+        let value = $(this).val()
+        console.log(value)
+        if (value.length > 0) {
+            $('#overlay-dashboard').css('display', 'block')
+        } else {
+            $('#overlay-dashboard').css('display', 'none')
+        }
+        $('#overlay-dashboard li').each(function () {
+            let text = $(this).text()
+            if (text.toLowerCase().indexOf(value.toLowerCase()) == -1) {
+                $(this).css('display', 'none')
+            } else {
+                $(this).css('display', 'block')
+            }
+        })
+    })
 </script>

@@ -1,5 +1,6 @@
 .dashboad__header{
     padding: 24px 32px;
+    
 }
 .dashboad__heading{
     margin: 0 0 24px 0;
@@ -33,4 +34,28 @@
     margin: 16px 32px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.125);
+}
+#overlay-dashboard{
+    position: absolute;
+    top: 36px;
+    left: 0;
+    width: 100%;
+    background-color: rgb(241, 241, 241);
+    z-index: 100;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    cursor: pointer;
+    display: none;
+}
+#overlay-dashboard li{
+    padding: 8px;
+}
+#overlay-dashboard li a{
+    color: black;
+    /* font-size: 14px; */
+    text-decoration: none;
+}
+#overlay-dashboard li:hover{
+    background-color: rgb(226, 225, 225);
 }
