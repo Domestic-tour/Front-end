@@ -100,3 +100,22 @@ $('.btn-add-new-item.save').on('click', function (e) {
         alert('Ảnh đang trong quá trình cập nhập, vui lòng chờ và thử lại sau 4s.')
     }
 })
+
+ //handle search
+ $('.staff__search-input').on('keyup', function () {
+    let value = $(this).val()
+    console.log(value)
+    if (value.length > 0) {
+        $('#overlay-search').css('display', 'block')
+    } else {
+        $('#overlay-search').css('display', 'none')
+    }
+    $('#overlay-search li').each(function () {
+        let text = $(this).text()
+        if (text.toLowerCase().indexOf(value.toLowerCase()) == -1) {
+            $(this).css('display', 'none')
+        } else {
+            $(this).css('display', 'block')
+        }
+    })
+})

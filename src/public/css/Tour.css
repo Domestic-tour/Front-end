@@ -90,6 +90,7 @@
     padding: 24px 32px;
     display: flex;
     align-items: center;
+    position: relative;
 }
 .staff__search{
     width: 100%;
@@ -136,4 +137,31 @@
 }
 .tours__container-header{
     text-align: center;
+}
+
+
+#overlay-search{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 60px;
+    left: 32px;
+    right: 82px;
+    /* width: 100%; */
+    background-color: rgb(241, 241, 241);
+    cursor: pointer;
+    list-style: none;
+    display: none;
+}
+
+#overlay-search li a{
+    color: black;
+    /* font-size: 14px; */
+    text-decoration: none;
+}
+#overlay-search li{
+    padding: 8px;
+}
+#overlay-search li:hover{
+    background-color: rgb(226, 225, 225);
 }

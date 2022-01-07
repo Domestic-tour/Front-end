@@ -2,15 +2,20 @@
 <div class="staff__header">
     <div class="staff__search">
         <div class="staff__search-icon">
-        <i class="fas fa-search"></i>
+            <i class="fas fa-search"></i>
         </div>
         <input type="text" class="staff__search-input" placeholder="Search...">
     </div>
+    <ul id="overlay-search">
+        {{#each tableTours}}
+        <li><a href="/tours/{{this.MaTour}}">{{this.TenTour}}</a></li>
+        {{/each}}
+    </ul>
     <div class="staff__add">
         <a class="button-open-add-new-item-overlay">
-        <div class="staff__add-btn">
-            <i class="staff__add-icon fas fa-plus"></i>
-        </div>
+            <div class="staff__add-btn">
+                <i class="staff__add-icon fas fa-plus"></i>
+            </div>
         </a>
     </div>
 </div>
@@ -88,14 +93,16 @@
                         <legend class="legend-overlay-add-new-item">Mã Tour</legend>
                         {{#each maxTour}}
                         <input type="text" name="MaTour" id="MaTour-addTour" readonly
-                            class="input-inside-fieldset-overlay-add-new-item" value="{{this.max}}" data-MaTour="{{this.max}}">
+                            class="input-inside-fieldset-overlay-add-new-item" value="{{this.max}}"
+                            data-MaTour="{{this.max}}">
                         {{/each}}
                     </fieldset>
                 </div>
                 <div class="container-fieldset-overlay-add-new-item">
                     <fieldset class="fieldset-overlay-add-new-item">
                         <legend class="legend-overlay-add-new-item">Tên Tour</legend>
-                        <input type="text" name="TenTour" id="" class="input-inside-fieldset-overlay-add-new-item" required>
+                        <input type="text" name="TenTour" id="" class="input-inside-fieldset-overlay-add-new-item"
+                            required>
                     </fieldset>
                 </div>
             </div>
@@ -103,7 +110,8 @@
                 <div class="container-fieldset-overlay-add-new-item">
                     <fieldset class="fieldset-overlay-add-new-item">
                         <legend class="legend-overlay-add-new-item">Giá Tour</legend>
-                        <input type="text" name="GiaTour" id="" class="input-inside-fieldset-overlay-add-new-item" required>
+                        <input type="text" name="GiaTour" id="" class="input-inside-fieldset-overlay-add-new-item"
+                            required>
                     </fieldset>
                 </div>
                 <div class="container-fieldset-overlay-add-new-item">
@@ -121,14 +129,16 @@
                 <div class="container-fieldset-overlay-add-new-item">
                     <fieldset class="fieldset-overlay-add-new-item">
                         <legend class="legend-overlay-add-new-item">Thời gian</legend>
-                        <input type="text" name="ThoiGianTour" id="" class="input-inside-fieldset-overlay-add-new-item" required>
+                        <input type="text" name="ThoiGianTour" id="" class="input-inside-fieldset-overlay-add-new-item"
+                            required>
                     </fieldset>
                 </div>
             </div>
             <div style="margin: 20px;">
                 <fieldset class="fieldset-overlay-add-new-item">
                     <legend class="legend-overlay-add-new-item">Mô tả</legend>
-                    <textarea name="MoTa" id="" rows="5" class="input-inside-fieldset-overlay-add-new-item" required></textarea>
+                    <textarea name="MoTa" id="" rows="5" class="input-inside-fieldset-overlay-add-new-item"
+                        required></textarea>
                 </fieldset>
             </div>
             <div style="margin: 20px;">
@@ -148,15 +158,16 @@
                         <div class="container-fieldset-overlay-add-new-item">
                             <fieldset class="fieldset-overlay-add-new-item">
                                 <legend class="legend-overlay-add-new-item">Ngày giờ</legend>
-                                <input type="text" name="1-NgayGio" id="" class="input-inside-fieldset-overlay-add-new-item" required>
+                                <input type="text" name="1-NgayGio" id=""
+                                    class="input-inside-fieldset-overlay-add-new-item" required>
                             </fieldset>
                         </div>
                     </div>
                     <div style="margin:5px 20px 5px 20px;">
                         <fieldset class="fieldset-overlay-add-new-item">
                             <legend class="legend-overlay-add-new-item">Nội dung</legend>
-                            <textarea name="1-NoiDung" id="" rows="3"
-                                class="input-inside-fieldset-overlay-add-new-item" required></textarea>
+                            <textarea name="1-NoiDung" id="" rows="3" class="input-inside-fieldset-overlay-add-new-item"
+                                required></textarea>
                         </fieldset>
                     </div>
                     <hr class="hr-overlay-add-new-item">
