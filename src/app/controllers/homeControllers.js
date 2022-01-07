@@ -64,6 +64,13 @@ class homeControllers {
             "MaNhanVien": "MNV6",
         })
     }
+    editStaff(req, res) {
+        res.render('staffs/editStaff', {
+            "MaNhanVien": req.query.MaNhanVien,
+            "TenNhanVien": req.query.TenNhanVien,
+            "SDTNhanVien": req.query.SDTNhanVien,
+        })
+    }
     showCustomers(req, res) {
         const findDoanDuLich = DoanDuLich.find().lean()
         const findKhachHang = KhachHang.find().lean()
@@ -219,6 +226,14 @@ class homeControllers {
         Promise.all([updateTour, updateLichTrinh])
             .then(() => res.redirect('/tours'))
     }
+    handleEditNhanVien(req, res) {
+        NhanVien.updateOne({ MaNhanVien: req.body.MaNhanVien }, {
+            TenNhanVien: req.body.TenNhanVien,
+            SDTNhanVien: req.body.SDTNhanVien,
+            ChucVu: req.body.ChucVu,
+        })
+            .then(() => res.redirect('/staffs'))
+    }
 
     // [POST] handle add tour
     handleAddTour(req, res) {
@@ -251,6 +266,16 @@ class homeControllers {
             res.redirect('/tours')
         })
     }
+    handleAddNhanVien(req, res) {
+        // res.json(req.body)
+        NhanVien.collection.insertOne({
+            ...req.body,
+            ActiveTour: false
+        })
+            .then(() => res.redirect('/staffs'))
+        // DoanDuLich.updateOne({ MaDoan: req.body.MaDoan }, { NgayKhoiHanh: req.body.NgayKhoiHanh })
+        //     .then(() => res.redirect('back'))
+    }
     handleEditNgayKhoiHanh(req, res) {
         // res.json(req.body)
         DoanDuLich.updateOne({ MaDoan: req.body.MaDoan }, { NgayKhoiHanh: req.body.NgayKhoiHanh })
@@ -263,10 +288,10 @@ class homeControllers {
         let insertDoanDuLich = DoanDuLich.collection.insertOne(doandulichs)
         let insertKhachHang = KhachHang.collection.insertMany(khachhangs)
         let insertPhuongTienDoan = PhuongTienDoan.collection.insertOne({
-            MaDoan:req.body.MaDoan,
-            MaPhuongTien:req.body.PhuongTien
+            MaDoan: req.body.MaDoan,
+            MaPhuongTien: req.body.PhuongTien
         })
-        Promise.all([insertDoanDuLich, insertKhachHang,insertPhuongTienDoan])
+        Promise.all([insertDoanDuLich, insertKhachHang, insertPhuongTienDoan])
             .then(() => {
                 res.redirect('/customers')
             })

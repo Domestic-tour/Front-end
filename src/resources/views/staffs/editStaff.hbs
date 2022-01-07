@@ -7,20 +7,20 @@
                 <i class=" fas fa-chevron-left"></i>
             </a>
         </div>
-        <h3 class="addstaffs__heading">Thêm nhân viên mới</h3>
+        <h3 class="addstaffs__heading">Sửa thông tin nhân viên</h3>
     </div>
-    <form class="addstaffs__container" method="post" action="/handle/addNhanVien">
+    <form class="addstaffs__container" method="post" action="/handle/editNhanVien">
         <div class="addstaffs__container-info">
             <label class="addstaffs__container-label" for="">Mã nhân viên:</label>
-            <input class="addstaffs__container-input" type="text" name="MaNhanVien" id="ma-nhan-vien" readonly>
+            <input class="addstaffs__container-input" type="text" name="MaNhanVien"  readonly value="{{MaNhanVien}}">
         </div>
         <div class="addstaffs__container-info">
             <label class="addstaffs__container-label" for="">Họ và tên:</label>
-            <input class="addstaffs__container-input" t type="text" name="TenNhanVien" id="" required>
+            <input class="addstaffs__container-input" t type="text" name="TenNhanVien" id="" required value="{{TenNhanVien}}">
         </div>
         <div class="addstaffs__container-info">
             <labe class="addstaffs__container-label" for="">Số điện thoại:</labe>
-            <input class="addstaffs__container-input" type="text" name="SDTNhanVien" id="" required>
+            <input class="addstaffs__container-input" type="text" name="SDTNhanVien" id="" required value="{{SDTNhanVien}}">
         </div>
         <div class="addstaffs__container-info">
             <label class="addstaffs__container-label" for="">Chức vụ:</label>
@@ -35,9 +35,6 @@
     </form>
 </div>
 <script>
-    $(document).ready(function () {
-        let lastMaNhanVien = parseInt(window.location.href.split('=')[1].split('MNV')[1]) + 1
-        $('#ma-nhan-vien').val(`MNV${lastMaNhanVien}`)
-        console.log(lastMaNhanVien)
-    });
+   
+   
 </script>

@@ -60,6 +60,7 @@
             if(text_capcha =='')
                 alert('Confirm capcha.')
             else{
+                localStorage.setItem('token', 'admin')
                 window.location.replace('/dashboard');
             }
         }

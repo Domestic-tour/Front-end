@@ -7,15 +7,20 @@
 <div class="staff__header">
     <div class="staff__search">
         <div class="staff__search-icon">
-        <i class="fas fa-search"></i>
+            <i class="fas fa-search"></i>
         </div>
         <input type="text" class="staff__search-input" placeholder="Search...">
     </div>
+    <ul id="overlay-search">
+        {{#each nhanviens}}
+        <li>{{this.TenNhanVien}}</li>
+        {{/each}}
+    </ul>
     <div class="staff__add">
-        <a href="/staffs/addNewStaff">
-        <div class="staff__add-btn">
-            <i class="staff__add-icon fas fa-plus"></i>
-        </div>
+        <a id="add-new-nhan-vien">
+            <div class="staff__add-btn">
+                <i class="staff__add-icon fas fa-plus"></i>
+            </div>
         </a>
     </div>
 </div>
@@ -23,38 +28,45 @@
     <h2 class="staff__container-name">Danh sách nhân viên</h2>
     <table class="staff__container-list">
         <tr>
-            {{#each nhanviens}}
-                <tr class="row-nhanvien">
-                    <td hidden class="row-check-active-nhanvien">{{this.ActiveTour}}</td>
-                    <td>{{this.MaNhanVien}}</td>
-                    <td>{{this.TenNhanVien}}</td>
-                    <td>{{this.SDTNhanVien}}</td>
-                    <td>{{this.ChucVu}}</td>
-                    <td class="td-checkactive-nhanvien">
-                        <span class="span-checkactive-nhanvien "></span>
-                    </td>
-                    <td>
-                        <div class="container-icon-extend-option tourist-groups">
-                            <div class="icon-extend-option">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </div>
-                        </div>
-                        <div class="menu-icon-extend-option">
-                            <div class="item-option-icon-extend-option">
-                                <table style="margin: 0;">
-                                    <tr style="background-color: transparent;">
-                                        <td>
-                                            <i class="fas fa-edit"></i>
-                                        </td>
-                                        <td class="btn-edit-doandulich tourist-groups">Sửa</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                {{/each}}
+            <th>Mã nhân viên</th>
+            <th>Tên nhân viên</th>
+            <th>Số điện thoai</th>
+            <th>Chức vụ</th>
+            <th>Trạng thái</th>
+            <th></th>
         </tr>
+        {{#each nhanviens}}
+        <tr class="row-nhanvien">
+            <td hidden class="row-check-active-nhanvien">{{this.ActiveTour}}</td>
+            <td class="ma-nhan-vien">{{this.MaNhanVien}}</td>
+            <td class="ten-nhan-vien">{{this.TenNhanVien}}</td>
+            <td class="so-dien-thoai">{{this.SDTNhanVien}}</td>
+            <td>{{this.ChucVu}}</td>
+            <td class="td-checkactive-nhanvien">
+                <span class="span-checkactive-nhanvien "></span>
+            </td>
+            <td>
+                <div class="container-icon-extend-option tourist-groups">
+                    <div class="icon-extend-option">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                </div>
+                <div class="menu-icon-extend-option">
+                    <div class="item-option-icon-extend-option">
+                        <table style="margin: 0;">
+                            <tr style="background-color: transparent;">
+                                <td>
+                                    <i class="fas fa-edit"></i>
+                                </td>
+                                <td class="btn-edit-nhanvien tourist-groups">Sửa</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+
     </table>
 </div>
 
@@ -65,5 +77,55 @@
     $('.container-item-tag').removeClass('active')
     $('.container-item-tag').eq(1).addClass('active')
     /////
+    // css cái dấu 3 chấm nằm dọc phía cuói table doan du lich
+    $('.container-icon-extend-option.tourist-groups').on('click', function (e) {
+        let index = $('.container-icon-extend-option').index(this)
+        if ($('.menu-icon-extend-option').eq(index).css('display') == 'block')
+            $('.menu-icon-extend-option').eq(index).css('display', 'none')
+        else {
+            $('.menu-icon-extend-option').eq(index).css('display', 'block')
+        }
 
+    })
+    $('.btn-edit-nhanvien').on('click', function () {
+        let index = $('.btn-edit-nhanvien').index(this)
+        let maNhanVien = $('.ma-nhan-vien').eq(index).text()
+        let tenNhanVien = $('.ten-nhan-vien').eq(index).text()
+        let soDienThoai = $('.so-dien-thoai').eq(index).text()
+        window.location.href = `/staffs/editStaff?MaNhanVien=${maNhanVien}&TenNhanVien=${tenNhanVien}&SDTNhanVien=${soDienThoai}`
+    })
+
+    //handle search
+    $('.staff__search-input').on('keyup', function () {
+        let value = $(this).val()
+        console.log(value)
+        if (value.length > 0) {
+            $('#overlay-search').css('display', 'block')
+        } else {
+            $('#overlay-search').css('display', 'none')
+        }
+        $('#overlay-search li').each(function () {
+            let text = $(this).text()
+            if (text.toLowerCase().indexOf(value.toLowerCase()) == -1) {
+                $(this).css('display', 'none')
+            } else {
+                $(this).css('display', 'block')
+            }
+        })
+    })
+    $('#overlay-search li').on('click', function () {
+        $('.staff__search-input').val('')
+        $('#overlay-search').css('display', 'none')
+        let value = $(this).text()
+        console.log({ value })
+        $('.ten-nhan-vien').each(function () {
+            let text = $(this).text()
+            let index = $('.ten-nhan-vien').index(this)
+            if (text.indexOf(value) != -1) {
+                $('.row-nhanvien').eq(index).addClass('active')
+                console.log({ text })
+            }
+        })
+    })
+   
 </script>

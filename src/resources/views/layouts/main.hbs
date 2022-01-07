@@ -55,7 +55,7 @@
             <div class="container-item-list">
                 <div class="container-item-tag ">
                     <div class="container-item-tag-icons">
-                    <i class="fas fa-tachometer-alt container-item-tag-icon"></i>
+                        <i class="fas fa-tachometer-alt container-item-tag-icon"></i>
                     </div>
                     <span>
                         <a href="/dashboard" class="container-item-tag-header">Dashboard</a>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="container-item-tag ">
                     <div class="container-item-tag-icons">
-                    <i class="fas fa-user container-item-tag-icon"></i>
+                        <i class="fas fa-user container-item-tag-icon"></i>
                     </div>
                     <span>
                         <a href="/staffs" class="container-item-tag-header">Staffs</a>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="container-item-tag ">
                     <div class="container-item-tag-icons">
-                    <i class="fas fa-users container-item-tag-icon"></i>
+                        <i class="fas fa-users container-item-tag-icon"></i>
                     </div>
                     <span>
                         <a href="/customers" class="container-item-tag-header">Tourist Groups</a>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="container-item-tag ">
                     <div class="container-item-tag-icons">
-                    <i class="fas fa-torii-gate container-item-tag-icon"></i>
+                        <i class="fas fa-torii-gate container-item-tag-icon"></i>
                     </div>
                     <span>
                         <a href="/tours" class="container-item-tag-header">Tours</a>
@@ -87,7 +87,7 @@
                 </div>
                 <div class="container-item-tag ">
                     <div class="container-item-tag-icons">
-                    <i class="fas fa-chart-pie container-item-tag-icon"></i>
+                        <i class="fas fa-chart-pie container-item-tag-icon"></i>
                     </div>
                     <span>
                         <a href="/statistics" class="container-item-tag-header">Statistics</a>
@@ -120,6 +120,12 @@
     })
     let pathname = window.location.pathname;
     console.log(pathname)
+    //check sign in
+    if(pathname !="/"){
+        if(!localStorage.getItem('token')){
+            window.location.replace('/');
+        }
+    }
     if (pathname == "/") {
         $('#layout-left-container').css('display', 'none')
         $('#divMain').css('padding-left', '0px')
@@ -133,6 +139,13 @@
         $('.header').css('display', 'block')
         $('.container').css('margin-top', '50px')
     }
+
+    // search
+    $('.row-nhanvien').on('click', function () {
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active')
+        }
+    })
 </script>
 
 </html>

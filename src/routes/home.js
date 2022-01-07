@@ -6,6 +6,7 @@ const homeControllers = require('../app/controllers/homeControllers')
 
 router.get('/dashboard', homeControllers.showDashboard)
 router.get('/staffs/addNewStaff', homeControllers.addNewStaff)
+router.get('/staffs/editStaff', homeControllers.editStaff)
 router.get('/staffs', homeControllers.showStaffs)
 router.get('/customers', homeControllers.showCustomers)
 
@@ -21,7 +22,9 @@ router.get('/', homeControllers.signIn)
 
 //handle 
 router.post('/handle/editTour', homeControllers.handleEditTour)
+router.post('/handle/editNhanVien', homeControllers.handleEditNhanVien)
 router.post('/handle/addTour', homeControllers.handleAddTour)
+router.post('/handle/addNhanVien', homeControllers.handleAddNhanVien)
 router.post('/handle/addDoanDuLich', homeControllers.handleAddDoanDuLich)
 router.post('/handle/editNgayKhoiHanh', homeControllers.handleEditNgayKhoiHanh)
 router.post('/handle/finishDoanDuLich', homeControllers.handleFinishDoanDuLich)

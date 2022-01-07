@@ -405,3 +405,7 @@ tr {
 }
 
 /* end css ...  */
+
+.row-nhanvien.active{
+    background-color: rgb(241, 241, 241);
+}

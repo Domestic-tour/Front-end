@@ -1,5 +1,6 @@
 // Thêm ảnh từ lap vào thư viện
 // Lưu ý : đường dẫn sẽ thay đổi vào cái MaTour 
+let checkUploaded = null
 var myWidget = cloudinary.createUploadWidget({
     cloudName: 'di2u0wa8l',
     uploadPreset: 'ml_default',
@@ -7,6 +8,7 @@ var myWidget = cloudinary.createUploadWidget({
 }, (error, result) => {
     if (!error && result && result.event === "success") {
         console.log('Done! Here is the image info: ', result.info);
+        checkUploaded = true
     }
 }
 )
@@ -86,9 +88,15 @@ $('.btn-add-new-item.cancel').on('click', function (e) {
 })
 $('.btn-add-new-item.save').on('click', function (e) {
     e.preventDefault()
-    // settimeout để có thời gian cho cái ảnh nó tải lên xong
-    setTimeout(function () {
+    if(checkUploaded == null){
+        alert('Vui lòng chọn ảnh cho tour du lịch của bạn.')
+    }
+    else if (checkUploaded) {
         let form = document.forms['form-add-new-tour']
         form.submit()
-    }, 5000)
+        checkUploaded = false
+    }
+    else{
+        alert('Ảnh đang trong quá trình cập nhập, vui lòng chờ và thử lại sau 4s.')
+    }
 })

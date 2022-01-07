@@ -1,5 +1,12 @@
 $(document).ready(function () {
     setColorAndValForCheckActive()
+    $('#add-new-nhan-vien').click(function (e) {
+        e.preventDefault()
+        let numberNhanVien = $('.row-nhanvien').length
+        let lastMaNhanVien =$('.ma-nhan-vien').eq(numberNhanVien-1).html()
+        window.location.href = `/staffs/addNewStaff?MaNhanVien=${lastMaNhanVien}`
+        
+    })
 });
 function setColorAndValForCheckActive() {
     let totalRow = $('.row-nhanvien').length
